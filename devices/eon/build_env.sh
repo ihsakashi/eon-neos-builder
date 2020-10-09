@@ -24,5 +24,5 @@ export NEOS_BASE_FOR_USR="https://raw.githubusercontent.com/commaai/eon-neos/d22
 export NEOS_BASE_FOR_DASHCAM="$NEOS_BASE_FOR_USR"
 
 # QT
-export QT_PACKAGE_VERSION=5.12.8
+export QT_PACKAGE_VERSION=5.13.0
 export QT_PACKAGE_URL="https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz"
