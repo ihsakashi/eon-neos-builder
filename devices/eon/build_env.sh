@@ -22,7 +22,3 @@ export NEOS_BASE_FOR_USR="https://raw.githubusercontent.com/commaai/eon-neos/d22
 # TODO: this url can't be used for NEOS 14 because it's missing the focaltech touchscreen fix in the kernel
 # export NEOS_BASE_FOR_DASHCAM="https://raw.githubusercontent.com/commaai/openpilot/dashcam-staging/installer/updater/update.json"
 export NEOS_BASE_FOR_DASHCAM="$NEOS_BASE_FOR_USR"
-
-# QT
-export QT_PACKAGE_VERSION=5.13.0
-export QT_PACKAGE_URL="https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz"

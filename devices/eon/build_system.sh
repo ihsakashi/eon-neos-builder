@@ -26,6 +26,11 @@ else
         ./pull_from_phone.sh
     fi
 fi
+
+if [ -z "${COMPILE_QT}" ]; then
+    ./build_qt.sh
+fi
+
 popd
 
 cd $DIR/mindroid
