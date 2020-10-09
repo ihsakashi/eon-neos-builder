@@ -93,7 +93,6 @@ cd ${WORK_QT}/qtbase
         -no-libinput \
         -no-mtdev \
         -no-tslib \
-        -no-xkbcommon-evdev \
         -gif \
         -ico \
         -system-libpng \

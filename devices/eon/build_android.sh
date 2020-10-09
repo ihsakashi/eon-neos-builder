@@ -31,7 +31,7 @@ $TOOLS/repo sync -c -j$JOBS
 
 export PATH=$PWD/bin:$PATH
 source build/envsetup.sh # QT needs env
-(breakfast oneplus3 && make -j$JOBS)
+breakfast oneplus3 && make -j$JOBS
 
 if [[ "${COMPILE_QT}" -eq 1 ]]; then
   source build_qt.sh
