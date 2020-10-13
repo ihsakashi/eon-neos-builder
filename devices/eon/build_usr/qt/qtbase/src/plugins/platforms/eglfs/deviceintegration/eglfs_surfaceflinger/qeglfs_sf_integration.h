@@ -21,13 +21,12 @@ public:
 
 private:
     QSize size;
-    EGLNativeDisplayType display;
 
-    sp<android::SurfaceComposerClient> session;
-    sp<android::IBinder> dtoken;
+    android::sp<android::SurfaceComposerClient> session;
+    android::sp<android::IBinder> dtoken;
     android::DisplayInfo dinfo;
-    sp<android::SurfaceControl> control;
-    sp<android::Surface> surface;
+    android::sp<android::SurfaceControl> control;
+    android::sp<android::Surface> surface;
 };
 
 QT_END_NAMESPACE

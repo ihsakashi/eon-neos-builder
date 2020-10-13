@@ -1,6 +1,5 @@
 #include "qeglfs_sf_integration.h"
 
-#include "util.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
@@ -29,12 +28,12 @@ void QEglFSSurfaceFlingerIntegration::platformInit() {
     assert(ret == 0);
 
     control = session->createSurface(String8("qeglfs-surface"),
-                dinfo.w dinfo.h, PIXEL_FORMAT_RGB_888);
+                dinfo.w, dinfo.h, PIXEL_FORMAT_RGBX_8888);
     assert(control != NULL);
 
     SurfaceComposerClient::openGlobalTransaction();
     ret = control->setLayer(0x40000000);
-    SurfaceComposerClient::clsoeGlobalTransaction(true);
+    SurfaceComposerClient::closeGlobalTransaction(true);
     assert(ret == 0);
 }
 
@@ -42,17 +41,16 @@ EGLNativeWindowType QEglFSSurfaceFlingerIntegration::createNativeWindow(QPlatfor
     Q_UNUSED(window);
     Q_UNUSED(format);
 
-    dinfo->w = size.width();
-    dinfo->h = size.height();
+    dinfo.w = size.width();
+    dinfo.h = size.height();
 
     surface = control->getSurface();
     assert(surface != NULL);
 
-    EGLNativeWindowType window = surface.get();
-    return window;
+    return (EGLNativeWindow)surface.get();
 }
 
-void QEglSurfaceFlingerIntegration::destroyNativeWindow(EGLNativeWindowType window)
+void QEglFSSurfaceFlingerIntegration::destroyNativeWindow(EGLNativeWindowType window)
 {
     free((void*)window);
 }
