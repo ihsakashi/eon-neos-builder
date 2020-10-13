@@ -1,0 +1,14 @@
+prefix=/home/ihsakashi/eon-neos-builder/devices/eon/build_usr/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/qt
+
+host_bins=${prefix}/bin
+qt_config=shared release c++11 c++14 c++1z concurrent dbus no-pkg-config stl properties animation textcodec big_codecs clock-monotonic codecs itemmodel proxymodel concatenatetablesproxymodel textdate datestring doubleconversion eventfd filesystemiterator filesystemwatcher gestures identityproxymodel inotify library mimetype process statemachine regularexpression settings sortfilterproxymodel stringlistmodel temporaryfile threadsafe-cloexec translation transposeproxymodel xmlstream xmlstreamreader xmlstreamwriter accessibility action opengles2 clipboard colornames cssparser cursor desktopservices imageformat_xpm draganddrop opengl egl freetype imageformatplugin harfbuzz highdpiscaling ico im image_heuristic_mask image_text imageformat_bmp imageformat_jpeg imageformat_png imageformat_ppm imageformat_xbm movie pdf picture sessionmanager shortcut standarditemmodel systemtrayicon tabletevent texthtmlparser textodfwriter validator whatsthis wheelevent networkinterface bearermanagement ftp http localserver networkdiskcache networkproxy socks5 udpsocket groupbox buttongroup menu lineedit spinbox slider scrollbar scrollarea itemviews tableview toolbutton calendarwidget colordialog listview columnview combobox completer contextmenu datawidgetmapper datetimeedit dial filesystemmodel dirmodel resizehandler mainwindow dockwidget textedit errormessage splitter stackedwidget treeview filedialog fontcombobox fontdialog fscompleter graphicsview graphicseffect inputdialog keysequenceedit lcdnumber listwidget mdiarea menubar messagebox paint_debug progressbar progressdialog rubberband sizegrip splashscreen statusbar statustip style-stylesheet syntaxhighlighter tabbar tablewidget tabwidget textbrowser toolbar toolbox tooltip treewidget undocommand undostack undogroup undoview wizard dom properties animation textcodec big_codecs clock-monotonic codecs itemmodel proxymodel concatenatetablesproxymodel textdate datestring doubleconversion eventfd filesystemiterator filesystemwatcher gestures identityproxymodel inotify library mimetype process statemachine regularexpression settings sortfilterproxymodel stringlistmodel temporaryfile threadsafe-cloexec translation transposeproxymodel xmlstream xmlstreamreader xmlstreamwriter
+
+Name: Qt5 Core
+Description: Qt Core module
+Version: 5.13.0
+Libs: -L${libdir} -lQt5Core 
+Cflags: -DQT_CORE_LIB -I${includedir}/QtCore -I${includedir}
+
