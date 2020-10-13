@@ -20,7 +20,7 @@ public:
     void destroyNativeWindow(EGLNativeWindowType window) override;
 
 private:
-    QSize size;
+    QSize msize;
 
     android::sp<android::SurfaceComposerClient> session;
     android::sp<android::IBinder> dtoken;
