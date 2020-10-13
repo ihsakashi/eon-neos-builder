@@ -15,7 +15,7 @@ HEADERS += $$PWD/qeglfs_sf_integration.h \
            $${ANDROID_BUILD_TOP}/hardware/libhardware/include \
            $${ANDROID_BUILD_TOP}/system/core/include
 
-LIBS += -lui -lgui -lutils -lcutils
+LIBS += $${ANDROID_PRODUCT_OUT/obj/lib/libui.so $${ANDROID_PRODUCT_OUT/obj/lib/libgui.so $${ANDROID_PRODUCT_OUT/obj/lib/libutils.so $${ANDROID_PRODUCT_OUT/obj/lib/libcutils.so -lEGL
 
 OTHER_FILES += $$PWD/eglfs_surfaceflinger.json
 

@@ -20,11 +20,15 @@ fi
 
 WORK_QT=$ROOT/mindroid/qt-everywhere-src-${QT_PACKAGE_VERSION}
 
-cp -rf $DIR/qt/qtbase/ ${WORK_QT}/qtbase/
+cp -rf $DIR/qt/qtbase/* ${WORK_QT}/qtbase/
 
-cd ${WORK_QT}/qtbase
+cd ${WORK_QT}
 
-patch -p1 < $DIR/qt/patches/qtbase_src_network_kernel_qdnslookup_unix.patch
+patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.11.2_qtbase_src_network_kernel_qdnslookup_unix.cpp.patch
+patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.11.2_qtbase_src_network_kernel_qhostinfo_unix.cpp.patch
+patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtbase_src_plugins_platforms_eglfs_deviceintegration_deviceintegration.pro.patch
+
+cd qtbase
 
 ./configure -v \
     -opensource \
@@ -41,7 +45,7 @@ patch -p1 < $DIR/qt/patches/qtbase_src_network_kernel_qdnslookup_unix.patch
     -plugindir "$DIR/usr/libexec/qt" \
     -no-warnings-are-errors \
     -nomake examples \
-    -nomake tests \
+    -nomake tests
 
 make
 make install
