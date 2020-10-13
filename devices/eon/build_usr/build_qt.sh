@@ -20,12 +20,11 @@ fi
 
 WORK_QT=$ROOT/mindroid/qt-everywhere-src-${QT_PACKAGE_VERSION}
 
-cp -rf $DIR/qt/qtbase/mkspecs/neos ${WORK_QT}/qtbase/mkspecs/
+cp -rf $DIR/qt/qtbase/ ${WORK_QT}/qtbase/
 
 cd ${WORK_QT}/qtbase
 
 patch -p1 < $DIR/qt/patches/qtbase_src_network_kernel_qdnslookup_unix.patch
-
 
 ./configure -v \
     -opensource \
@@ -44,6 +43,5 @@ patch -p1 < $DIR/qt/patches/qtbase_src_network_kernel_qdnslookup_unix.patch
     -nomake examples \
     -nomake tests \
 
-qmake
 make
 make install
