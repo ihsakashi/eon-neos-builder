@@ -26,7 +26,7 @@ echo "Building QT for NEOS"
 
 #(cd $ROOT/mindroid/system && source build/envsetup.sh && breakfast oneplus3)
 
-cd qtbase
+cd ${WORK_QT}/qtbase
 
 ./configure -v \
     -opensource \
