@@ -18,7 +18,7 @@ fi
 
 if [[ ! -d "${WORK_QT}" ]]; then
     wget --tries=inf $QT_PACKAGE_URL
-    tar xvf qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz
+    tar xf qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz
 
     pushd ${WORK_QT}
     patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.11.2_qtbase_src_network_kernel_qdnslookup_unix.cpp.patch
@@ -38,13 +38,14 @@ cd ${WORK_QT}/qtbase
 ./configure -v \
     -opensource \
     -confirm-license \
+    -release \
     --disable-rpath \
     -xplatform neos \
     -sysroot "${SYSROOT}" \
+    -no-gcc-sysroot \
     -extprefix "${OUT_DIR}" \
     -no-warnings-are-errors \
-    -nomake examples \
+    -system-zlib \
     -nomake tests
 
 make
-make install
