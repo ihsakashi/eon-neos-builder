@@ -6,6 +6,7 @@ QT_PACKAGE_VERSION=5.13.0
 QT_PACKAGE_URL="https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz"
 
 WORK_QT=$ROOT/mindroid/qt-everywhere-src-${QT_PACKAGE_VERSION}
+OUT_DIR=$DIR/out/data/data/com.termux/files
 
 cd $ROOT/mindroid
 
@@ -33,14 +34,14 @@ cd ${WORK_QT}/qtbase
     -confirm-license \
     --disable-rpath \
     -xplatform neos \
-    -prefix "$DIR/usr" \
-    -docdir "$DIR/usr/share/doc/qt" \
-    -headerdir "$DIR/usr/include/qt" \
-    -archdatadir "$DIR/usr/lib/qt" \
-    -datadir "$DIR/usr/share/qt" \
-    -sysconfdir "$DIR/usr/etc/qt" \
-    -examplesdir "$DIR/usr/share/doc/qt/examples" \
-    -plugindir "$DIR/usr/libexec/qt" \
+    -prefix "$OUT_DIR/usr" \
+    -docdir "$OUT_DIR/usr/share/doc/qt" \
+    -headerdir "$OUT_DIR/usr/include/qt" \
+    -archdatadir "$OUT_DIR/usr/lib/qt" \
+    -datadir "$OUT_DIR/usr/share/qt" \
+    -sysconfdir "$OUT_DIR/usr/etc/qt" \
+    -examplesdir "$OUT_DIR/usr/share/doc/qt/examples" \
+    -plugindir "$OUT_DIR/usr/libexec/qt" \
     -no-warnings-are-errors \
     -nomake examples \
     -nomake tests
