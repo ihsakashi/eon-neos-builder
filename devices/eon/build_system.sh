@@ -27,7 +27,7 @@ else
     fi
 fi
 
-if [ -z "${COMPILE_QT}" ]; then
+if [ ! -z "$DONT_COMPILE_QT" ]; then
     ./build_qt.sh
 fi
 
