@@ -5,10 +5,16 @@ ROOT=$DIR/..
 QT_PACKAGE_VERSION=5.13.0
 QT_PACKAGE_URL="https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz"
 
-WORK_QT=$ROOT/mindroid/qt-everywhere-src-${QT_PACKAGE_VERSION}
-OUT_DIR=$DIR/out/data/data/com.termux/files
+export WORK_QT=$ROOT/mindroid/qt-everywhere-src-${QT_PACKAGE_VERSION}
+SYSROOT=$DIR/out/data/data/com.termux/files/usr
+OUT_DIR=$ROOT/mindroid/mnt/comma/usr
 
 cd $ROOT/mindroid
+
+if [[ ! -d "${SYSROOT}" ]]; then
+    echo "Termux out dir not populated."
+    exit 0
+fi
 
 if [[ ! -d "${WORK_QT}" ]]; then
     wget --tries=inf $QT_PACKAGE_URL
@@ -34,14 +40,8 @@ cd ${WORK_QT}/qtbase
     -confirm-license \
     --disable-rpath \
     -xplatform neos \
-    -prefix "$OUT_DIR/usr" \
-    -docdir "$OUT_DIR/usr/share/doc/qt" \
-    -headerdir "$OUT_DIR/usr/include/qt" \
-    -archdatadir "$OUT_DIR/usr/lib/qt" \
-    -datadir "$OUT_DIR/usr/share/qt" \
-    -sysconfdir "$OUT_DIR/usr/etc/qt" \
-    -examplesdir "$OUT_DIR/usr/share/doc/qt/examples" \
-    -plugindir "$OUT_DIR/usr/libexec/qt" \
+    -sysroot "${SYSROOT}" \
+    -extprefix "${OUT_DIR}" \
     -no-warnings-are-errors \
     -nomake examples \
     -nomake tests
