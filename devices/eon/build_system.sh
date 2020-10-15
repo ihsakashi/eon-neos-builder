@@ -40,7 +40,7 @@ mkdir -p mnt
 sudo mount -o loop system.img.raw mnt
 sudo mkdir -p mnt/comma
 sudo cp -R ../build_usr/out/data/data/com.termux/files/usr mnt/comma
-(cd ${WORK_QT}/qtbase && make install)
+#(cd ${WORK_QT}/qtbase && make install)
 
 sudo chmod a+rx mnt/comma mnt/comma/usr mnt/comma/usr/lib
 # base build option for embedding dashcam is deprecated in favor of build-dashcam-images.sh
