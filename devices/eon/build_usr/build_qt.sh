@@ -17,7 +17,7 @@ if [[ ! -d "${SYSROOT}" ]]; then
 fi
 
 if [[ ! -d "${WORK_QT}" ]]; then
-    wget --tries=inf $QT_PACKAGE_URL
+    wget -nc --tries=inf $QT_PACKAGE_URL
     tar xf qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz
 
     pushd ${WORK_QT}
