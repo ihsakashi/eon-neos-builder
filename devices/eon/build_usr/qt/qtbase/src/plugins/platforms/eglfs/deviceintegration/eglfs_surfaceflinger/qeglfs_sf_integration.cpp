@@ -27,8 +27,8 @@ void QEglFSSurfaceFlingerIntegration::platformInit() {
     ret = SurfaceComposerClient::getDisplayInfo(dtoken, &dinfo);
     assert(ret == 0);
 
-    msize.setWidth(dtoken.w);
-    msize.setHeight(dtoken.h);
+    msize.setWidth(dinfo.w);
+    msize.setHeight(dinfo.h);
 
     control = session->createSurface(String8("qeglfs-surface"),
                 dinfo.w, dinfo.h, PIXEL_FORMAT_RGBX_8888);
@@ -40,7 +40,7 @@ void QEglFSSurfaceFlingerIntegration::platformInit() {
     assert(ret == 0);
 }
 
-QSize QEglFSSurfaceFlingerIntegration::screenSize() {
+QSize QEglFSSurfaceFlingerIntegration::screenSize() const{
     return msize;
 }
 
