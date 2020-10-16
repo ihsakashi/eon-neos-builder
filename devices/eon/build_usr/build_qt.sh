@@ -25,8 +25,6 @@ if [[ ! -d "${WORK_QT}" ]]; then
     patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.11.2_qtbase_src_network_kernel_qhostinfo_unix.cpp.patch
     patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtbase_src_gui_configure.json.patch
     patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtbase_src_plugins_platforms_eglfs_deviceintegration_deviceintegration.pro.patch
-    patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtbase_mkspecs_features_qmake_use.prf.patch
-    patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtbase_mkspecs_features_qt_configure.prf.patch
     popd
 
     cp -rf $DIR/qt/qtbase/* ${WORK_QT}/qtbase/
