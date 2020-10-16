@@ -6,7 +6,7 @@ QT_PACKAGE_VERSION=5.13.0
 QT_PACKAGE_URL="https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz"
 
 export WORK_QT=$ROOT/mindroid/qt-everywhere-src-${QT_PACKAGE_VERSION}
-SYSROOT=$DIR/out/data/data/com.termux/files/usr
+SYSROOT=$DIR/out/data/data/com.termux/files
 #OUT_DIR=$ROOT/mindroid/mnt/comma/usr
 
 cd $ROOT/mindroid
@@ -44,10 +44,9 @@ cd ${WORK_QT}/qtbase
     -xplatform neos \
     -sysroot "${SYSROOT}" \
     -no-gcc-sysroot \
-#    -extprefix "${OUT_DIR}" \
     -hostprefix "${DIR}/qt/tools" \
     -no-warnings-are-errors \
-    -system-zlib \
+    -nomake examples \
     -nomake tests
 
 make -j$(nproc)
