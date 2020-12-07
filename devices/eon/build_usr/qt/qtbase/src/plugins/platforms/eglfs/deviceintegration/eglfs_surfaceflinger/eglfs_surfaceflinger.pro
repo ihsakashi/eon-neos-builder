@@ -16,7 +16,6 @@ SOURCES += $$PWD/qeglfs_sf_main.cpp \
 
 HEADERS += $$PWD/qeglfs_sf_integration.h
 
-#LIBS += $${ANDROID_PRODUCT_OUT}/obj/lib/libui.so $${ANDROID_PRODUCT_OUT}/obj/lib/libgui.so $${ANDROID_PRODUCT_OUT}/obj/lib/libutils.so $${ANDROID_PRODUCT_OUT}/obj/lib/libcutils.so -lEGL
 LIBS += -lui -lgui -lutils -lcutils -lEGL
 
 OTHER_FILES += $$PWD/eglfs_surfaceflinger.json

@@ -45,6 +45,6 @@ yes | sdkmanager --licenses
 sdkmanager "platform-tools" "platforms;android-23" "platforms;android-27"
 sdkmanager "extras;android;m2repository"
 sdkmanager "extras;google;m2repository"
-sdkmanager "ndk-bundle"
+sdkmanager "ndk;20.1.5948944"
 
 echo "Dependency install completed"

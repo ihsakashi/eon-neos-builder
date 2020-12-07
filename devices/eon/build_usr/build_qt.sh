@@ -2,7 +2,7 @@
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 ROOT=$DIR/..
 
-QT_PACKAGE_VERSION=5.13.0
+QT_PACKAGE_VERSION=5.11.3
 QT_PACKAGE_URL="https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz"
 
 export WORK_QT=$ROOT/mindroid/qt-everywhere-src-${QT_PACKAGE_VERSION}
@@ -36,18 +36,32 @@ echo "Building QT for NEOS"
 
 cd ${WORK_QT}/qtbase
 
+# openssl library too old
+
 ./configure -v \
     -opensource \
     -confirm-license \
     -release \
     --disable-rpath \
-    -xplatform neos \
+    -no-use-gold-linker \
+    -xplatform neos-cross \
     -sysroot "${SYSROOT}" \
     -no-gcc-sysroot \
     -hostprefix "${DIR}/qt/tools" \
     -no-warnings-are-errors \
+    -opengl es2 \
+    -eglfs \
+    -system-pcre \
+    -system-zlib \
+    -no-openssl \
+    -no-system-proxies \
+    -no-cups \
+    -system-harfbuzz \
+    -system-libpng \
+    -system-libjpeg \
     -nomake examples \
-    -nomake tests
+    -nomake tests \
+    -recheck-all
 
 make -j$(nproc)
 make install
