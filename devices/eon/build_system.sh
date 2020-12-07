@@ -8,7 +8,7 @@ TOOLS=$ROOT/tools
 cd $DIR
 source build_env.sh
 
-./build_android.sh
+#./build_android.sh
 
 mkdir -p $OUT
 

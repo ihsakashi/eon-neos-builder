@@ -43,7 +43,6 @@ cd ${WORK_QT}/qtbase
     -confirm-license \
     -release \
     --disable-rpath \
-    -no-use-gold-linker \
     -xplatform neos-cross \
     -sysroot "${SYSROOT}" \
     -no-gcc-sysroot \
