@@ -171,6 +171,40 @@ make -j4
 make install
 popd
 
+# ----- Qt5 host tools
+#VERSION="5.11.3"
+wget --tries=inf https://download.qt.io/new_archive/qt/5.11/5.11.3/submodules/qtbase-everywhere-src-5.11.3.tar.xz
+tar xvf qtbase-everywhere-src-5.11.3.tar.xz
+tar xvf ~/qt-changes.tar.xz
+pushd qtbase-everywhere-src-5.11.3
+#patch -p1 < ~/qt-changes/patches/...
+cp -rf ../qt-changes/qtbase ./
+./configure -v \
+    -opensource \
+    -confirm-license \
+    -release \
+    --disable-rpath \
+    -platform neos \
+    -prefix "$PREFIX/local/Qt-5.11.3" \
+    -no-gcc-sysroot \
+    -no-warnings-are-errors \
+    -opengl es2 \
+    -eglfs \
+    -system-pcre \
+    -system-zlib \
+    -no-openssl \
+    -no-system-proxies \
+    -no-cups \
+    -system-harfbuzz \
+    -system-libpng \
+    -system-libjpeg \
+    -nomake examples \
+    -nomake tests \
+    -recheck-all
+cd src
+make -j4 sub-bootstrap qmake sub-moc sub-rcc sub-uic
+make install
+popd
 
 # ------- Install python packages
 cd $HOME
