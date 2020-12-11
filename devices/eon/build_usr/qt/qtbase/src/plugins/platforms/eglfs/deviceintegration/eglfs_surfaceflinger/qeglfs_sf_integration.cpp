@@ -27,6 +27,16 @@ void QEglFSSurfaceFlingerIntegration::platformInit() {
     ret = SurfaceComposerClient::getDisplayInfo(dtoken, &dinfo);
     assert(ret == 0);
 
+    int orientation = 1;
+    if (orientation == 1 || orientation == 3) {
+        int temp = dinfo.h;
+        dinfo.h = dinfo.w;
+        dinfo.w = temp;
+    }
+
+    Rect destRect(dinfo.w, dinfo.h);
+    session->setDisplayProjection(dtoken, orientation, destRect, destRect);
+
     msize.setWidth(dinfo.w);
     msize.setHeight(dinfo.h);
 
