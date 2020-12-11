@@ -22,13 +22,12 @@ else
         sudo rm -rf out/
         ./install.py
         ./finish.sh
+        if [ ! -z "$COMPILE_QT" ]; then
+            ./build_qt.sh
+        fi
     else
         ./pull_from_phone.sh
     fi
-fi
-
-if [ ! -z "$DONT_COMPILE_QT" ]; then
-    ./build_qt.sh
 fi
 
 popd
@@ -39,8 +38,8 @@ $TOOLS/simg2img $DIR/mindroid/system/out/target/product/oneplus3/system.img syst
 mkdir -p mnt
 sudo mount -o loop system.img.raw mnt
 sudo mkdir -p mnt/comma
+
 sudo cp -R ../build_usr/out/data/data/com.termux/files/usr mnt/comma
-#(cd ${WORK_QT}/qtbase && make install)
 
 sudo chmod a+rx mnt/comma mnt/comma/usr mnt/comma/usr/lib
 # base build option for embedding dashcam is deprecated in favor of build-dashcam-images.sh
