@@ -171,42 +171,47 @@ make -j4
 make install
 popd
 
-if (( 0 )); then
-  # ----- Qt5 host tools
-  #VERSION="5.11.3"
-  wget --tries=inf https://download.qt.io/new_archive/qt/5.11/5.11.3/submodules/qtbase-everywhere-src-5.11.3.tar.xz
-  tar xvf qtbase-everywhere-src-5.11.3.tar.xz
-  tar xvf ~/qt-changes.tar.xz
-  pushd qtbase-everywhere-src-5.11.3
-  #patch -p1 < ~/qt-changes/patches/...
-  cp -rf ../qt-changes/qtbase ./
-  ./configure -v \
-      -opensource \
-      -confirm-license \
-      -release \
-      --disable-rpath \
-      -platform neos \
-      -prefix "$PREFIX/local/Qt-5.11.3" \
-      -no-gcc-sysroot \
-      -no-warnings-are-errors \
-      -opengl es2 \
-      -eglfs \
-      -system-pcre \
-      -system-zlib \
-      -no-openssl \
-      -no-system-proxies \
-      -no-cups \
-      -system-harfbuzz \
-      -system-libpng \
-      -system-libjpeg \
-      -nomake examples \
-      -nomake tests \
-      -recheck-all
-  cd src
-  make -j4 sub-bootstrap qmake sub-moc sub-rcc sub-uic
-  make install
-  popd
-fi
+# ----- Qt5
+wget --tries=inf https://mirror.csclub.uwaterloo.ca/qtproject/archive/qt/5.13/5.13.0/submodules/qtbase-everywhere-src-5.13.0.tar.xz
+tar xvf qtbase-everywhere-src-5.13.0.tar.xz
+tar xvf ~/qt-changes.tar.xz
+pushd qtbase-everywhere-src-5.13.0
+cp -rf ../patches/qconfig.cpp src/corelib/global/qconfig.cpp
+cp -rf ../qtbase/* .
+
+set +e
+./configure -v \
+    -opensource \
+    -confirm-license \
+    -release \
+    --disable-rpath \
+    -platform neos \
+    -prefix "/data/data/com.termux/files/usr" \
+    -force-pkg-config \
+    -no-warnings-are-errors \
+    -qt-pcre \
+    -qt-zlib \
+    -no-openssl \
+    -no-system-proxies \
+    -no-cups \
+    -qt-harfbuzz \
+    -qt-libpng \
+    -qt-libjpeg \
+    -nomake examples \
+    -nomake tests
+set -e
+  
+pushd qmake
+../bin/qmake -spec neos -o Makefile.qmake-aux qmake-aux.pro
+make -f Makefile.qmake-aux
+install -Dm700 "./qmake" "$PREFIX/bin/qmake"
+popd
+
+pushd examples/opengl/2dpainting
+qmake -spec neos
+make
+timeout 10s 2dpainting
+popd
 
 # ------- Install python packages
 cd $HOME
