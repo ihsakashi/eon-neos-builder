@@ -162,6 +162,7 @@ if __name__ == "__main__":
         'rsync',
         'strace',
         'tar',
+        'termux-elf-cleaner',
         'tmux',
         'vim',
         'wget',
