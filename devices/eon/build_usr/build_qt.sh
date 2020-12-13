@@ -29,6 +29,9 @@ patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.11.2_qtbase_src_network_kernel_q
 patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.11.2_qtbase_src_network_kernel_qhostinfo_unix.cpp.patch
 patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtbase_src_gui_configure.json.patch
 patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtbase_src_plugins_platforms_eglfs_deviceintegration_deviceintegration.pro.patch
+patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtmultimedia_src_plugins_opensles_qopenslesaudioinput.cpp.patch
+patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtmultimedia_src_plugins_opensles_qopenslesengine.cpp.patch
+patch -p1 < $DIR/qt/patches/qt-everywhere-src-5.13.0_qtmultimedia_src_plugins_plugins.pro.patch
 popd
 
 cp -rf $DIR/qt/qtbase/* ${WORK_QT}/qtbase/
@@ -37,7 +40,7 @@ sed -i "s|@NDK_ROOT@|${NDK_ROOT}|g" "${WORK_QT}/qtbase/mkspecs/neos-cross/qmake.
 
 echo "Building QT for NEOS"
 
-cd ${WORK_QT}/qtbase
+cd ${WORK_QT}
 
 # openssl library too old
 
@@ -64,8 +67,48 @@ export PKG_CONFIG_SYSROOT_DIR=$DIR/out
     -qt-harfbuzz \
     -qt-libpng \
     -qt-libjpeg \
+    -no-vulkan \
+    -no-glib \
     -nomake examples \
-    -nomake tests
+    -nomake tests \
+    -skip qt3d \
+    -skip qtactiveqt \
+    -skip qtandroidextras \
+    -skip qtcanvas3d \
+    -skip qtcharts \
+    -skip qtconnectivity \
+    -skip qtdatavis3d \
+    -skip qtdeclarative \
+    -skip qtdoc \
+    -skip qtgamepad \
+    -skip qtgraphicaleffects \
+    -skip qtimageformats \
+    -skip qtlocation \
+    -skip qtmacextras \
+    -skip qtnetworkauth \
+    -skip qtpurchasing \
+    -skip qtquickcontrols \
+    -skip qtquickcontrols2 \
+    -skip qtremoteobjects \
+    -skip qtscript \
+    -skip qtscxml \
+    -skip qtsensors \
+    -skip qtserialbus \
+    -skip qtserialport \
+    -skip qtspeech \
+    -skip qtsvg \
+    -skip qttools \
+    -skip qttranslations \
+    -skip qtvirtualkeyboard \
+    -skip qtwayland \
+    -skip qtwebchannel \
+    -skip qtwebengine \
+    -skip qtwebglplugin \
+    -skip qtwebsockets \
+    -skip qtwebview \
+    -skip qtwinextras \
+    -skip qtx11extras \
+    -skip qtxmlpatterns
 
 make -j$(nproc)
 make install
@@ -73,6 +116,8 @@ make install
 echo "Building QT tools for target"
 
 # host tools
+cd ${WORK_QT}/qtbase
+
 mkdir -p bin.host lib.host
 cp -a bin/* bin.host
 cp -a lib/{libQt5Bootstrap.a,libQt5Bootstrap.prl} lib.host
