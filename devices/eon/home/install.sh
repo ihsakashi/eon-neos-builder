@@ -171,6 +171,13 @@ set +e
     --disable-rpath \
     -platform neos \
     -prefix "/data/data/com.termux/files/usr" \
+    -docdir "/data/data/com.termux/files/usr/share/doc/qt" \
+    -headerdir "/data/data/com.termux/files/usr/include/qt" \
+    -archdatadir "/data/data/com.termux/files/usr/lib/qt" \
+    -datadir "/data/data/com.termux/files/usr/share/qt" \
+    -sysconfdir "/data/data/com.termux/files/usr/etc/xdg" \
+    -examplesdir "/data/data/com.termux/files/usr/share/doc/qt/examples" \
+    -plugindir "/data/data/com.termux/files/usr/libexec/qt" \
     -force-pkg-config \
     -no-warnings-are-errors \
     -qt-pcre \
@@ -181,6 +188,8 @@ set +e
     -qt-harfbuzz \
     -qt-libpng \
     -qt-libjpeg \
+    -no-vulkan \
+    -no-glib \
     -nomake examples \
     -nomake tests
 set -e
@@ -194,7 +203,7 @@ popd
 pushd examples/opengl/2dpainting
 qmake -spec neos
 make
-timeout 10s 2dpainting
+timeout 10s ./2dpainting
 popd
 
 # ------- Install python packages
