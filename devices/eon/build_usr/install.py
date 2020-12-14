@@ -179,7 +179,6 @@ if __name__ == "__main__":
         'tar',
         'termux-elf-cleaner',
         'tmux',
-        'ttf-dejavu',
         'vim',
         'wget',
         'xz-utils',

@@ -62,8 +62,6 @@ sudo chown root:root mnt/build.prop
 sudo chmod 644 mnt/build.prop
 sudo chmod 600 mnt/comma/home/.ssh/*
 sudo chmod 600 -R mnt/comma/usr/etc/ssh
-sudo ln -sf mnt/fonts mnt/comma/usr/lib/fonts
-sudo ln -sf mnt/comma/usr/share/fonts/TTF mnt/comma/usr/lib/fonts
 sudo umount mnt
 $TOOLS/img2simg system.img.raw $OUT/system.simg
 mv system.img.raw $OUT/system.img
