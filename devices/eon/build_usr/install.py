@@ -144,8 +144,6 @@ if __name__ == "__main__":
         'gdb',
         'git',
         'git-lfs',
-        'harfbuzz',
-        'harfbuzz-dev',
         'htop',
         'jq',
         'libcurl-dev',
@@ -174,8 +172,6 @@ if __name__ == "__main__":
         'openssl-tool',
         'patchelf',
         'pkg-config',
-        'pcre2',
-        'pcre2-dev',
         # Included in main python package in recent termux
         #'python-dev',
         'rsync',

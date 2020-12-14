@@ -154,10 +154,10 @@ unset i
 cp -rf bin.host/* bin
 cp -rf lib.host/{libQt5Bootstrap.a,libQt5Bootstrap.prl} lib
 
-(
-    cd $DIR/qt
-    tar cf - patches/ qtbase/ | xz -z - > $ROOT/home/qt-changes.tar.xz
-)
+#(
+#    cd $DIR/qt
+#    tar cf - patches/ qtbase/ | xz -z - > $ROOT/home/qt-changes.tar.xz
+#)
 
 # fixed and clean up
 echo "Patching QT install"
@@ -166,15 +166,15 @@ find "${QT_TARGET}/lib" -type f -name '*.prl' -exec sed -i -e '/^QMAKE_PRL_BUILD
 
 find "${QT_TARGET}/lib" -type f -name '*.pc' -exec sed -i -e "s|$DIR\/out||g" "{}" \; -exec sed -i -e "s|${NDK_ROOT}\/toolchains\/llvm\/prebuilt\/linux-x86_64\/sysroot\/usr\/lib\/aarch64-linux-android\/21|/system\/lib64|g" "{}" \;
 
-find "${QT_TARGET}/mkspecs/modules" -type f -name '*.pri' -exec sed -i -e "s|${NDK_ROOT}\/toolchains\/llvm\/prebuilt\/linux-x86_64\/sysroot\/usr\/lib\/aarch64-linux-android\/21|/system\/lib64|g" "{}" \;
+find "${QT_TARGET}/lib/qt/mkspecs" -type f -name '*.pri' -exec sed -i -e "s|${NDK_ROOT}\/toolchains\/llvm\/prebuilt\/linux-x86_64\/sysroot\/usr\/lib\/aarch64-linux-android\/21|/system\/lib64|g" "{}" \;
 
 find "${QT_TARGET}/lib" -type f -name '*.cmake' -exec sed -i -e "s|${NDK_ROOT}\/toolchains\/llvm\/prebuilt\/linux-x86_64\/sysroot\/usr\/lib\/aarch64-linux-android\/21|/system\/lib64|g" "{}" \;
 
 find "${QT_TARGET}/lib" -iname \*.la -delete
 
-sed -i 's|.//mkspecs/neos-cross"|mkspecs/neos|g' "${QT_TARGET}/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake"
+sed -i 's|//mkspecs/neos-cross"|/mkspecs/neos|g' "${QT_TARGET}/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake"
 
-sed -i "s|PKG_CONFIG_SYSROOT_DIR = $DIR\/out|PKG_CONFIG_SYSROOT_DIR = \/data\/data\/com.termux\/files\/usr|g" "${QT_TARGET}/mkspecs/qconfig.pri"
-sed -i "s|$DIR\/out||g" "${QT_TARGET}/mkspecs/qconfig.pri"
+sed -i "s|PKG_CONFIG_SYSROOT_DIR = $DIR\/out|PKG_CONFIG_SYSROOT_DIR = \/data\/data\/com.termux\/files\/usr|g" "${QT_TARGET}/lib/qt/mkspecs/qconfig.pri"
+sed -i "s|$DIR\/out||g" "${QT_TARGET}/lib/qt/mkspecs/qconfig.pri"
 
 echo "Done. Run install.sh"
