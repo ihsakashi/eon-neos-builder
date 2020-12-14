@@ -56,6 +56,13 @@ export PKG_CONFIG_SYSROOT_DIR=$DIR/out
     -xplatform neos-cross \
     -sysroot "${SYSROOT}" \
     -prefix "/usr" \
+    -docdir "/usr/share/doc/qt" \
+    -headerdir "/usr/include/qt" \
+    -archdatadir "/usr/lib/qt" \
+    -datadir "/usr/share/qt" \
+    -sysconfdir "/usr/etc/xdg" \
+    -examplesdir "/usr/share/doc/qt/examples" \
+    -plugindir "/usr/libexec/qt" \
     -no-gcc-sysroot \
     -force-pkg-config \
     -no-warnings-are-errors \
