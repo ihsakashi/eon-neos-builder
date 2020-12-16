@@ -8,7 +8,7 @@ TOOLS=$ROOT/tools
 cd $DIR
 source build_env.sh
 
-#./build_android.sh
+./build_android.sh
 
 mkdir -p $OUT
 
@@ -29,7 +29,6 @@ else
         ./pull_from_phone.sh
     fi
 fi
-
 popd
 
 cd $DIR/mindroid
@@ -38,7 +37,6 @@ $TOOLS/simg2img $DIR/mindroid/system/out/target/product/oneplus3/system.img syst
 mkdir -p mnt
 sudo mount -o loop system.img.raw mnt
 sudo mkdir -p mnt/comma
-
 sudo cp -R ../build_usr/out/data/data/com.termux/files/usr mnt/comma
 
 sudo chmod a+rx mnt/comma mnt/comma/usr mnt/comma/usr/lib

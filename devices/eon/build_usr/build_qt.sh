@@ -76,6 +76,9 @@ export PKG_CONFIG_SYSROOT_DIR=$DIR/out
     -qt-libjpeg \
     -no-vulkan \
     -no-glib \
+    -no-dbus \
+    -no-feature-vnc \
+    -no-feature-testlib \
     -nomake examples \
     -nomake tests \
     -skip qt3d \
