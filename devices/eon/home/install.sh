@@ -167,7 +167,7 @@ set +e
 ./configure -v \
     -opensource \
     -confirm-license \
-    -release \
+    -debug \
     --disable-rpath \
     -platform neos \
     -prefix "/data/data/com.termux/files/usr" \
