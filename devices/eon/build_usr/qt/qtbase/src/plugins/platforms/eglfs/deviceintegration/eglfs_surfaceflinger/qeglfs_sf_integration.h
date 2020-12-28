@@ -15,12 +15,16 @@ class QEglFSSurfaceFlingerIntegration : public QEglFSDeviceIntegration
 {
 public:
     void platformInit() override;
+    void platformDestroy() override;
     QSize screenSize() const override;
     EGLNativeWindowType createNativeWindow(QPlatformWindow *window, const QSize &size, const QSurfaceFormat &format) override;
     void destroyNativeWindow(EGLNativeWindowType window) override;
+    QSurfaceFormat surfaceFormatFor(const QSurfaceFormat &inputFormat) override;
+
+    QByteArray fbDeviceName() const override { return "/dev/graphics/fb0"; }
 
 private:
-    QSize msize;
+    QSize mSize;
 
     android::sp<android::SurfaceComposerClient> session;
     android::sp<android::IBinder> dtoken;
