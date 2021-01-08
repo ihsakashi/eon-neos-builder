@@ -2,7 +2,7 @@
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 ROOT=$DIR/..
 
-QT_PACKAGE_VERSION=5.13.0
+QT_PACKAGE_VERSION=5.13.2
 QT_PACKAGE_URL="https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-${QT_PACKAGE_VERSION}.tar.xz"
 QT_PREBUILT_QMAKE="https://github.com/termux/x11-packages/raw/master/packages/qt5-base/termux-prebuilt-qmake.txz"
 

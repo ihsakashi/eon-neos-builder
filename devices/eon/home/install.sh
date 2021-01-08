@@ -156,10 +156,10 @@ make install
 popd
 
 # ----- Qt5
-wget --tries=inf https://mirror.csclub.uwaterloo.ca/qtproject/archive/qt/5.13/5.13.0/submodules/qtbase-everywhere-src-5.13.0.tar.xz
-tar xvf qtbase-everywhere-src-5.13.0.tar.xz
+wget --tries=inf https://mirror.csclub.uwaterloo.ca/qtproject/archive/qt/5.13/5.13.2/submodules/qtbase-everywhere-src-5.13.2.tar.xz
+tar xvf qtbase-everywhere-src-5.13.2.tar.xz
 tar xvf ~/qt-changes.tar.xz
-pushd qtbase-everywhere-src-5.13.0
+pushd qtbase-everywhere-src-5.13.2
 cp -rf ../patches/qconfig.cpp src/corelib/global/qconfig.cpp
 cp -rf ../qtbase/* .
 
@@ -196,14 +196,21 @@ set -e
   
 pushd qmake
 ../bin/qmake -spec neos -o Makefile.qmake-aux qmake-aux.pro
-make -f Makefile.qmake-aux
+make -j4 -f Makefile.qmake-aux
 install -Dm700 "./qmake" "$PREFIX/bin/qmake"
 popd
 
 pushd examples/opengl/2dpainting
 qmake -spec neos
-make
+make -j4
 timeout 10s ./2dpainting
+popd
+
+# check if raster windows fixed
+pushd examples/gui/rasterwindow
+qmake -spec neos
+make -j4
+timeout 10s ./rasterwindow
 popd
 
 # ------- Install python packages
