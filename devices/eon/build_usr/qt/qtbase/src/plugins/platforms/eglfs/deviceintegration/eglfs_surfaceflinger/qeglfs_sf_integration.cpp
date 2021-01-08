@@ -39,10 +39,21 @@ void QEglFSSurfaceFlingerIntegration::platformInit() {
 
     mSize.setWidth(dinfo.w);
     mSize.setHeight(dinfo.h);
+
+    control = session->createSurface(String8("qeglfs-surface"),
+                mSize.width(), mSize.height(), PIXEL_FORMAT_RGBA_8888);
+    assert(control != NULL);
+
+    SurfaceComposerClient::openGlobalTransaction();
+    ret = control->setLayer(0x40000000); // on top
+    SurfaceComposerClient::closeGlobalTransaction(true);
+    assert(ret == 0);
 }
 
 void QEglFSSurfaceFlingerIntegration::platformDestroy() {
+    control = 0;
     session->dispose();
+    session = 0;
 }
 
 QSize QEglFSSurfaceFlingerIntegration::screenSize() const {
@@ -54,22 +65,13 @@ EGLNativeWindowType QEglFSSurfaceFlingerIntegration::createNativeWindow(QPlatfor
     Q_UNUSED(format);
     status_t ret;
 
-    control = session->createSurface(String8("qeglfs-surface"),
-                mSize.width(), mSize.height(), PIXEL_FORMAT_RGBA_8888);
-    assert(control != NULL);
-
-    SurfaceComposerClient::openGlobalTransaction();
-    ret = control->setLayer(0x40000000); // on top
-    SurfaceComposerClient::closeGlobalTransaction(true);
-    assert(ret == 0);
-
     surface = control->getSurface();
     assert(surface != NULL);
 
     return (EGLNativeWindowType)surface.get();
 }
 
-QSurfaceFormat QEglFSSurfaceFlingerIntegration::surfaceFormatFor(const QSurfaceFormat &inputFormat) {
+QSurfaceFormat QEglFSSurfaceFlingerIntegration::surfaceFormatFor(const QSurfaceFormat &inputFormat) const {
     QSurfaceFormat format = inputFormat;
     // PIXEL_FORMAT_RGBA_8888
     format.setRedBufferSize(8);
@@ -77,12 +79,6 @@ QSurfaceFormat QEglFSSurfaceFlingerIntegration::surfaceFormatFor(const QSurfaceF
     format.setBlueBufferSize(8);
     format.setAlphaBufferSize(8);
     return format;
-}
-
-void QEglFSSurfaceFlingerIntegration::destroyNativeWindow(EGLNativeWindowType window)
-{
-    delete window;
-    control = 0;
 }
 
 QT_END_NAMESPACE
