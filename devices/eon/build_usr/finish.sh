@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
+
 # Copy in configurations files
 cp -R usr/** out/data/data/com.termux/files/usr/
 
@@ -17,3 +19,7 @@ mkdir -p out/data/data/com.termux/files/usr/var/log/apt/
 pushd out/data/data/com.termux/files/usr
 ln -sf /tmp tmp
 popd
+
+# prefix symlink
+mkdir -p /data/data/com.termux/files
+ln -sf $DIR/out/data/data/com.termux/files/usr /data/data/com.termux/files/usr
