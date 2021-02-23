@@ -155,64 +155,6 @@ make -j4
 make install
 popd
 
-# ----- Qt5
-wget --tries=inf https://mirror.csclub.uwaterloo.ca/qtproject/archive/qt/5.13/5.13.2/submodules/qtbase-everywhere-src-5.13.2.tar.xz
-tar xvf qtbase-everywhere-src-5.13.2.tar.xz
-tar xvf ~/qt-changes.tar.xz
-pushd qtbase-everywhere-src-5.13.2
-cp -rf ../patches/qconfig.cpp src/corelib/global/qconfig.cpp
-cp -rf ../qtbase/* .
-
-set +e
-./configure -v \
-    -opensource \
-    -confirm-license \
-    -release \
-    --disable-rpath \
-    -platform neos \
-    -prefix "/data/data/com.termux/files/usr" \
-    -docdir "/data/data/com.termux/files/usr/share/doc/qt" \
-    -headerdir "/data/data/com.termux/files/usr/include/qt" \
-    -archdatadir "/data/data/com.termux/files/usr/lib/qt" \
-    -datadir "/data/data/com.termux/files/usr/share/qt" \
-    -sysconfdir "/data/data/com.termux/files/usr/etc/xdg" \
-    -examplesdir "/data/data/com.termux/files/usr/share/doc/qt/examples" \
-    -plugindir "/data/data/com.termux/files/usr/libexec/qt" \
-    -force-pkg-config \
-    -no-warnings-are-errors \
-    -qt-pcre \
-    -qt-zlib \
-    -no-openssl \
-    -no-system-proxies \
-    -no-cups \
-    -qt-harfbuzz \
-    -qt-libpng \
-    -qt-libjpeg \
-    -no-vulkan \
-    -no-glib \
-    -nomake examples \
-    -nomake tests
-set -e
-  
-pushd qmake
-../bin/qmake -spec neos -o Makefile.qmake-aux qmake-aux.pro
-make -j4 -f Makefile.qmake-aux
-install -Dm700 "./qmake" "$PREFIX/bin/qmake"
-popd
-
-pushd examples/opengl/2dpainting
-qmake -spec neos
-make -j4
-timeout 10s ./2dpainting
-popd
-
-# check if raster windows fixed
-pushd examples/gui/rasterwindow
-qmake -spec neos
-make -j4
-timeout 10s ./rasterwindow
-popd
-
 # ------- Install python packages
 cd $HOME
 

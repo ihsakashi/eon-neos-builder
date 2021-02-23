@@ -157,11 +157,6 @@ unset i
 cp -rf bin.host/* bin
 cp -rf lib.host/{libQt5Bootstrap.a,libQt5Bootstrap.prl} lib
 
-#(
-#    cd $DIR/qt
-#    tar cf - patches/ qtbase/ | xz -z - > $ROOT/home/qt-changes.tar.xz
-#)
-
 # fixed and clean up
 echo "Patching QT install"
 
