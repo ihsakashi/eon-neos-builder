@@ -1,0 +1,12 @@
+--- termux-toolchain/sysroot/usr/include/c++/v1/cmath.orig	2021-02-22 23:13:32.948729807 +0000
++++ ./usr/include/c++/v1/cmath	2021-02-22 23:15:23.040735118 +0000
+@@ -302,7 +302,8 @@
+ */
+ 
+ #include <__config>
+-#include <math.h>
++#include <c++/v1/math.h>
++
+ #include "version"
+ 
+ #if !defined(_LIBCPP_HAS_NO_PRAGMA_SYSTEM_HEADER)

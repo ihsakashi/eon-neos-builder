@@ -1,0 +1,11 @@
+--- /home/fornwall/lib/android-ndk/sysroot/usr/include/c++/v1/math.h	2021-02-22 21:40:01.060459905 +0000
++++ ./usr/include/c++/v1/math.h	2021-02-22 21:21:39.828405580 +0000
+@@ -1525,7 +1525,7 @@
+ // and receive the definitions of mathematical constants, even if <math.h>
+ // has previously been included.
+ #if defined(_LIBCPP_MSVCRT) && defined(_USE_MATH_DEFINES)
+-#include_next <math.h>
++#include "../../math.h"
+ #endif
+ 
+ #endif  // _LIBCPP_MATH_H

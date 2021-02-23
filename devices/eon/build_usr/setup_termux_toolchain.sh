@@ -24,12 +24,11 @@ mkdir -p $NDK
 cd $NDK/..
 rm -Rf $(basename $NDK)
 echo "Downloading android ndk..."
-curl --fail --retry 3 -o ndk.zip \
-    https://dl.google.com/android/repository/android-ndk-r${TERMUX_NDK_VERSION}-Linux-x86_64.zip
+wget -nc --tries=3 https://dl.google.com/android/repository/android-ndk-r${TERMUX_NDK_VERSION}-Linux-x86_64.zip \
+    -O ndk-r$TERMUX_NDK_VERSION.zip
 rm -Rf android-ndk-r$TERMUX_NDK_VERSION
-unzip -q ndk.zip
+unzip -q ndk-r$TERMUX_NDK_VERSION.zip
 mv android-ndk-r$TERMUX_NDK_VERSION $(basename $NDK)
-rm ndk.zip
 
 ###
 
@@ -99,6 +98,8 @@ for f in $DIR/ndk-patches/*.patch; do
         sed "s%\@TERMUX_HOME\@%${TERMUX_ANDROID_HOME}%g" | \
         patch --silent -p1;
 done
+#patch -p1 < $DIR/ndk-patches/cmath.patch.bak
+
 # libintl.h: Inline implementation gettext functions.
 # langinfo.h: Inline implementation of nl_langinfo().
 cp $DIR/ndk-patches/{libintl.h,langinfo.h} usr/include
