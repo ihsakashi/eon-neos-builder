@@ -51,7 +51,7 @@ export PKG_CONFIG_SYSROOT_DIR=$DIR/out
 ./configure -v \
     -opensource \
     -confirm-license \
-    -debug \
+    -release \
     --disable-rpath \
     -xplatform neos-cross \
     -sysroot "${SYSROOT}" \
